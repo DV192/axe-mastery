@@ -23,6 +23,7 @@ const Target = () => {
             src="/models/Ancient Ruins target.glb"
             rotation-y={degToRad(-90)}
             position-x={0}
+            position-y={1}
             scale={3}
           />
         </RigidBody>
