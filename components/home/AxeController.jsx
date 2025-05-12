@@ -54,7 +54,7 @@ const AxeController = () => {
   const onCollisionEnter = (e) => {
     if (e.other.rigidBodyObject.name === "target") {
       rigidBodyRef.current.setBodyType(2);
-      rigidBodyRef.current.setRotation(quat(0, 0, 0, 0), true);
+      rigidBodyRef.current.setRotation(quat(0, 0, 0, 1), true);
       rigidBodyRef.current.setLinvel({ x: 0, y: 0, z: 0 });
       rigidBodyRef.current.setAngvel({ x: 0, y: 0, z: 0 });
       setImpact(rigidBodyRef.current.translation());
