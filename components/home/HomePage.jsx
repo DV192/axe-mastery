@@ -1,5 +1,8 @@
+import { useGame } from "@/hooks/useGame"
 
 const HomePage = () => {
+  const startGame = useGame(state => state.startGame);
+
   return (
     <section className="fixed inset-0 z-10 flex items-center justify-center pointer-events-none">
       <div className="absolute top-4 left-4 md:top-8 md:left-14 opacity-0 animate-fade-in-down animation-delay-200 pointer-events-auto">
@@ -25,7 +28,7 @@ const HomePage = () => {
             Become an axe master and break the curse of the temple by exploding
             balloons. 🎈 <br />
           </p>
-          <button className="bg-white/80 text-black font-bold px-4 py-2 rounded-lg shadow-md hover:bg-white/100 transition duration-200 pointer-events-auto cursor-pointer">
+          <button className="bg-white/80 text-black font-bold px-4 py-2 rounded-lg shadow-md hover:bg-white/100 transition duration-200 pointer-events-auto cursor-pointer" onClick={startGame}>
             Start Game
           </button>
         </>
