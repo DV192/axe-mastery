@@ -5,6 +5,8 @@ import { GradientSky } from "./GradientSky";
 import AxeController from "./AxeController";
 import Target from "./Target";
 import { VFXParticles } from "wawa-vfx";
+import Balloons from "./Balloons";
+import Walls from "./Walls";
 
 const Experience = () => {
   const controls = useRef();
@@ -39,6 +41,8 @@ const Experience = () => {
 
       <AxeController />
       <Target />
+      <Balloons />
+      <Walls />
 
       <VFXParticles 
         name="sparks"
