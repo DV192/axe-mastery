@@ -27,26 +27,27 @@ const AxeController = () => {
   useEffect(() => {
     if (axeLaunched) {
       rigidBodyRef.current.setBodyType(0);
-      rigidBodyRef.current.setRotation(quat(0, 0, 0, 0), true);
+      rigidBodyRef.current.setRotation(quat(0, 0, 0, 1), true);
       rigidBodyRef.current.setLinvel({ x: 0, y: 0, z: 0 });
       rigidBodyRef.current.setAngvel({ x: 0, y: 0, z: 0 });
       rigidBodyRef.current.applyImpulse({ x: 1, y: 0.5, z: 0 }, true);
       rigidBodyRef.current.applyTorqueImpulse({ x: 0, y: 0, z: -0.2 }, true);
     } else {
+      rigidBodyRef.current.setBodyType(2);
       setImpact(false);
     }
   }, [axeLaunched]);
 
   useFrame((state, delta) => {
     if (rigidBodyRef.current && !axeLaunched) {
-      rigidBodyRef.current.setRotation(quat(0, 0, 0, 0), true);
-      rigidBodyRef.current.setLinvel({ x: 0, y: 0, z: 0 });
-      rigidBodyRef.current.setAngvel({ x: 0, y: 0, z: 0 });
+      rigidBodyRef.current.setRotation(quat(0, 0, 0, 1), true);
       rigidBodyRef.current.setTranslation({
         x: 1,
         y: -0.2 + state.pointer.y * 0.5,
         z: state.pointer.x * 0.5
       });
+      rigidBodyRef.current.setLinvel({ x: 0, y: 0, z: 0 });
+      rigidBodyRef.current.setAngvel({ x: 0, y: 0, z: 0 });
     }
   });
 
