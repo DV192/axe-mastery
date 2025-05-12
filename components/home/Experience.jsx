@@ -2,6 +2,9 @@ import { useRef } from "react";
 import { CameraControls, Environment, Grid, PerspectiveCamera } from "@react-three/drei";
 
 import { GradientSky } from "./GradientSky";
+import AxeController from "./AxeController";
+import Target from "./Target";
+import { VFXParticles } from "wawa-vfx";
 
 const Experience = () => {
   const controls = useRef();
@@ -34,16 +37,20 @@ const Experience = () => {
         />
       </directionalLight>
 
-      <group>
-        <mesh position-x={10}>
-          <boxGeometry args={[1, 1, 1]} />
-          <meshStandardMaterial
-            color={"orange"}
-            emissive={"orange"}
-            emissiveIntensity={8}
-          />
-        </mesh>
-      </group>
+      <AxeController />
+      <Target />
+
+      <VFXParticles 
+        name="sparks"
+        settings={{
+          fadeAlpha: [0, 1],
+          fadeSize: [0, 0],
+          gravity: [0, -10, 0],
+          intensity: 8,
+          nbParticles: 100000,
+          renderMode: "billboard"
+        }}
+      />
     </>
   )
 }

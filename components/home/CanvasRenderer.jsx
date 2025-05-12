@@ -5,6 +5,7 @@ import { Bloom, EffectComposer } from "@react-three/postprocessing";
 import { Perf } from "r3f-perf";
 
 import Experience from "./Experience";
+import { Physics } from "@react-three/rapier";
 
 useGLTF.preload("models/balloon_modified.glb");
 useGLTF.preload("models/Axe Small Applied.glb");
@@ -33,7 +34,9 @@ const CanvasRenderer = () => {
         <color attach="background" args={["#111"]} />
 
         <Suspense fallback={null}>
-          <Experience />
+          <Physics debug colliders={false}>
+            <Experience />
+          </Physics>
         </Suspense>
 
         <EffectComposer>
