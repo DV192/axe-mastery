@@ -51,7 +51,7 @@ const AxeController = () => {
     }
   });
 
-  const onCollisionEnter = (e) => {
+  const onIntersectionEnter = (e) => {
     if (e.other.rigidBodyObject.name === "target") {
       rigidBodyRef.current.setBodyType(2);
       rigidBodyRef.current.setRotation(quat(0, 0, 0, 1), true);
@@ -63,7 +63,14 @@ const AxeController = () => {
 
   return (
     <>
-      <RigidBody ref={rigidBodyRef} name="axe" colliders="hull" type="kinematicPosition" onCollisionEnter={onCollisionEnter}>
+      <RigidBody
+        ref={rigidBodyRef}
+        name="axe"
+        colliders="hull"
+        type="kinematicPosition"
+        sensor
+        onIntersectionEnter={onIntersectionEnter}
+      >
         <Gltf src="/models/Axe Small.glb" position-y={-0.3} />
       </RigidBody>
 
