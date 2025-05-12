@@ -2,6 +2,7 @@ import { create } from "zustand";
 
 export const useGame = create((set, get) => ({
   axeLaunched: false,
+  balloons: [],
   launchAxe: () => {
     set({ axeLaunched: true });
     setTimeout(() => {
