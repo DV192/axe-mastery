@@ -34,11 +34,11 @@ const CanvasRenderer = () => {
 
         <color attach="background" args={["#111"]} />
 
-        <Suspense fallback={null}>
+        {/* <Suspense fallback={null}> */}
           <Physics debug={physicsDebug} colliders={false}>
             <Experience />
           </Physics>
-        </Suspense>
+        {/* </Suspense> */}
 
         <EffectComposer>
           <Bloom mipmapBlur intensity={0.5} luminanceThreshold={1.5} />
