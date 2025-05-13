@@ -8,6 +8,7 @@ import { VFXParticles } from "wawa-vfx";
 import Balloons from "./Balloons";
 import Walls from "./Walls";
 import { useGame } from "@/hooks/useGame";
+import AncientRuins from "./AncientRuins";
 
 const Experience = () => {
   const controls = useRef();
@@ -53,6 +54,7 @@ const Experience = () => {
       <Target />
       <Balloons />
       <Walls />
+      <AncientRuins />
 
       <VFXParticles 
         name="sparks"
