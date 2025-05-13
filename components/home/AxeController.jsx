@@ -10,6 +10,7 @@ const AxeController = () => {
   const rigidBodyRef = useRef();
   const axeLaunched = useGame(state => state.axeLaunched);
   const launchAxe = useGame(state => state.launchAxe);
+  const onTargetHit = useGame(state => state.onTargetHit);
   const [impact, setImpact] = useState(false);
 
   useEffect(() => {
@@ -37,6 +38,12 @@ const AxeController = () => {
       setImpact(false);
     }
   }, [axeLaunched]);
+
+  useEffect(() => {
+    if (impact) {
+      onTargetHit();
+    }
+  }, [impact]);
 
   useFrame((state, delta) => {
     if (rigidBodyRef.current && !axeLaunched) {

@@ -21,6 +21,7 @@ const Balloon = ({ position, color }) => {
   const { nodes, materials } = useGLTF("/models/balloon_modified.glb");
   const rigidBodyRef = useRef();
   const [exploded, setExploded] = useState(false);
+  const onBalloonHit = useGame(state => state.onBalloonHit);
 
   const onIntersectionEnter = useCallback((e) => {
     if (e.other.rigidBodyObject.name === "axe") {
@@ -37,6 +38,12 @@ const Balloon = ({ position, color }) => {
       }, true);
     }
   }, []);
+
+  useEffect(() => {
+    if (exploded) {
+      onBalloonHit();
+    }
+  }, [exploded]);
 
   useFrame(() => {
     if (rigidBodyRef.current && !exploded) {
