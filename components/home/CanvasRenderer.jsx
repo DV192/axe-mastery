@@ -19,7 +19,7 @@ const CanvasRenderer = () => {
 
   return (
     <div className="w-full h-full fixed inset-0">
-      <Canvas shadows camera={{ position: [-0.1, 0, 0], fov: 50 }}>
+      <Canvas shadows camera={{ position: [0, 0.5, 10], fov: 50 }}>
         {debug && (
           <>
             <Stats />
