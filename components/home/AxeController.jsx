@@ -1,10 +1,11 @@
 import { useEffect, useRef, useState } from "react";
 import { useFrame } from "@react-three/fiber";
-import { Gltf } from "@react-three/drei"
+import { Gltf, PositionalAudio } from "@react-three/drei"
 import { quat, RigidBody } from "@react-three/rapier"
+import { VFXEmitter } from "wawa-vfx";
 
 import { useGame } from "@/hooks/useGame";
-import { VFXEmitter } from "wawa-vfx";
+import { AUDIOS } from "./CanvasRenderer";
 
 const AxeController = () => {
   const rigidBodyRef = useRef();
@@ -12,6 +13,8 @@ const AxeController = () => {
   const launchAxe = useGame(state => state.launchAxe);
   const onTargetHit = useGame(state => state.onTargetHit);
   const [impact, setImpact] = useState(false);
+  const sfxThrow = useRef();
+  const sfxHit = useRef();
 
   useEffect(() => {
     const onPointerUp = () => {
@@ -33,6 +36,7 @@ const AxeController = () => {
       rigidBodyRef.current.setAngvel({ x: 0, y: 0, z: 0 });
       rigidBodyRef.current.applyImpulse({ x: 1, y: 0.5, z: 0 }, true);
       rigidBodyRef.current.applyTorqueImpulse({ x: 0, y: 0, z: -0.2 }, true);
+      sfxThrow.current.play();
     } else {
       rigidBodyRef.current.setBodyType(2);
       setImpact(false);
@@ -65,6 +69,8 @@ const AxeController = () => {
       rigidBodyRef.current.setLinvel({ x: 0, y: 0, z: 0 });
       rigidBodyRef.current.setAngvel({ x: 0, y: 0, z: 0 });
       setImpact(rigidBodyRef.current.translation());
+      sfxHit.current.stop();
+      sfxHit.current.play();
     }
   }
 
@@ -78,6 +84,14 @@ const AxeController = () => {
         sensor
         onIntersectionEnter={onIntersectionEnter}
       >
+        <PositionalAudio
+          ref={sfxThrow}
+          autoplay={false}
+          url={AUDIOS.throw}
+          loop={false}
+          distance={50}
+        />
+
         <Gltf src="/models/Axe Small.glb" position-y={-0.3} />
 
         {axeLaunched && !impact && (
@@ -105,6 +119,14 @@ const AxeController = () => {
           </group>
         )}
       </RigidBody>
+
+      <PositionalAudio
+        url={AUDIOS.impact}
+        autoplay={false}
+        ref={sfxHit}
+        loop={false}
+        distance={10}
+      />
 
       {impact && (
         <group position={[impact.x, impact.y, impact.z]}>
