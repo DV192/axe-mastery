@@ -14,7 +14,7 @@ useGLTF.preload("models/AncientRuins-v1.glb");
 useGLTF.preload("models/Ancient Ruins target.glb");
 
 const CanvasRenderer = () => {
-  const debug = true;
+  const debug = false;
   const physicsDebug = false;
 
   return (
