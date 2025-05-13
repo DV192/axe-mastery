@@ -79,6 +79,31 @@ const AxeController = () => {
         onIntersectionEnter={onIntersectionEnter}
       >
         <Gltf src="/models/Axe Small.glb" position-y={-0.3} />
+
+        {axeLaunched && !impact && (
+          <group>
+            <VFXEmitter
+              position-y={-0.3}
+              emitter="axes"
+              settings={{
+                loop: true,
+                spawnMode: "time",
+                nbParticles: 80,
+                particlesLifetime: [1, 1],
+                duration: 0.5,
+                size: [1, 1],
+                startPositionMin: [0, 0, 0],
+                startPositionMax: [0, 0, 0],
+                directionMin: [0, 0, 0],
+                directionMax: [0, 0, 0],
+                startRotationMin: [0, 0, 0],
+                startRotationMax: [0, 0, 0],
+                speed: [0.1, 2],
+                colorStart: ["#424242"],
+              }}
+            />
+          </group>
+        )}
       </RigidBody>
 
       {impact && (
