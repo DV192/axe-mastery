@@ -13,19 +13,39 @@ import AncientRuins from "./AncientRuins";
 const Experience = () => {
   const controls = useRef();
   const axeLaunched = useGame((state) => state.axeLaunched);
+  const firstGame = useGame((state) => state.firstGame);
+  const throws = useGame((state) => state.throws);
   const { nodes } = useGLTF("models/Axe Small Applied.glb");
 
   useEffect(() => {
-    if (axeLaunched) {
-      controls.current.setLookAt(10, 0, 30, 10, 0, 0, true);
+    if (firstGame) {
+      controls.current.setLookAt(-15, -5, 20, 10, 0, 0, true);
+    } else if (axeLaunched || throws === 0) {
+      if (window.innerWidth < 1024) {
+        controls.current.setLookAt(-10, 10, 40, 10, 0, 0, true);
+      } else {
+        controls.current.setLookAt(10, 0, 30, 10, 0, 0, true);
+      }
     } else {
       controls.current.setLookAt(-0.1, 0, 0, 0, 0, 0, true);
     }
-  }, [axeLaunched]);
+  }, [axeLaunched, firstGame, throws]);
 
   return (
     <>
-      <CameraControls ref={controls} />
+      <CameraControls
+        ref={controls}
+        mouseButtons={{
+          left: 0,
+          middle: 0,
+          right: 0,
+        }}
+        touches={{
+          one: 0,
+          two: 0,
+          three: 0,
+        }}
+      />
       <GradientSky />
       <Environment preset="sunset" environmentIntensity={0.3} />
       <Grid
