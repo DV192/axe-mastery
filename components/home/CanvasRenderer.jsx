@@ -15,6 +15,7 @@ useGLTF.preload("models/Ancient Ruins target.glb");
 
 const CanvasRenderer = () => {
   const debug = true;
+  const physicsDebug = false;
 
   return (
     <div className="w-full h-full fixed inset-0">
@@ -34,7 +35,7 @@ const CanvasRenderer = () => {
         <color attach="background" args={["#111"]} />
 
         <Suspense fallback={null}>
-          <Physics debug colliders={false}>
+          <Physics debug={physicsDebug} colliders={false}>
             <Experience />
           </Physics>
         </Suspense>
